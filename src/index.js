@@ -38,6 +38,9 @@ if (module.hot) {
         setTimeout(render);
     })
 }
-render();
+
+store.firebaseAuthIsReady.then(() => {
+    render();
+})
 
 registerServiceWorker();
