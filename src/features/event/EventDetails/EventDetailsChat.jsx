@@ -40,7 +40,7 @@ const EventDetailsChat = () => {
                             <Comment.Text>
                                 <p>
                                     This has been very useful for my research. Thanks as well!
-                        </p>
+                </p>
                             </Comment.Text>
                             <Comment.Actions>
                                 <Comment.Action>Reply</Comment.Action>
@@ -89,7 +89,7 @@ const EventDetailsChat = () => {
                 </Comment.Group>
             </Segment>
         </div>
-    )
-}
+    );
+};
 
 export default EventDetailsChat;

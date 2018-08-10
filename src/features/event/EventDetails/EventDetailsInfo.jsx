@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Segment, Grid, Icon, Button } from 'semantic-ui-react';
-import format from 'date-fns/format';
 import EventDetailsMap from './EventDetailsMap';
+import format from 'date-fns/format';
 
 class EventDetailsInfo extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            showMap: false
-        }
-        this.showMapToggle = this.showMapToggle.bind(this);
+    state = {
+        showMap: false
     }
 
     componentWillUnmount() {
@@ -19,7 +14,7 @@ class EventDetailsInfo extends Component {
         })
     }
 
-    showMapToggle () {
+    showMapToggle = () => {
         this.setState(prevState => ({
             showMap: !prevState.showMap
         }))
@@ -27,6 +22,10 @@ class EventDetailsInfo extends Component {
 
     render() {
         const { event } = this.props;
+        let eventDate;
+        if (event.date) {
+            eventDate = event.date.toDate()
+        }
         return (
             <Segment.Group>
                 <Segment attached="top">
@@ -45,7 +44,7 @@ class EventDetailsInfo extends Component {
                             <Icon name="calendar" size="large" color="teal" />
                         </Grid.Column>
                         <Grid.Column width={15}>
-                            <span>{format(event.date, 'ddd Do MMMM')} at {format(event.date, 'hh:mm A')}</span>
+                            <span>{format(eventDate, 'dddd Do MMM')} at {format(eventDate, 'h:mm A')}</span>
                         </Grid.Column>
                     </Grid>
                 </Segment>
@@ -58,13 +57,14 @@ class EventDetailsInfo extends Component {
                             <span>{event.venue}</span>
                         </Grid.Column>
                         <Grid.Column width={4}>
-                            <Button onClick={this.showMapToggle} color="teal" size="tiny" content={this.state.showMap ? "Hide Map" : "Show Map"} />
+                            <Button onClick={this.showMapToggle} color="teal" size="tiny" content={this.state.showMap ? 'Hide Map' : 'Show Map'} />
                         </Grid.Column>
                     </Grid>
                 </Segment>
-                { this.state.showMap && <EventDetailsMap lat={event.venueLatLng.lat} lng={event.venueLatLng.lng} />}
+                {this.state.showMap &&
+                    <EventDetailsMap lat={event.venueLatLng.lat} lng={event.venueLatLng.lng} />}
             </Segment.Group>
-        )
+        );
     }
 }
 

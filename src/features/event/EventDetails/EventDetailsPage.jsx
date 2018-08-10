@@ -1,41 +1,67 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { withFirestore } from 'react-redux-firebase';
 import EventDetailsHeader from './EventDetailsHeader';
 import EventDetailsInfo from './EventDetailsInfo';
 import EventDetailsChat from './EventDetailsChat';
 import EventDetailsSidebar from './EventDetailsSidebar';
+import { objectToArray } from '../../../app/common/util/helpers';
+import { goingToEvent, cancelGoingToEvent } from '../../user/userActions';
 
-const mapStateToProps = (state, ownProps) => {
-    const eventId = ownProps.match.params.id;
-
+const mapStateToProps = state => {
     let event = {};
 
-    if(eventId && state.events.length > 0){
-        event = state.events.filter(event => event.id === eventId)[0];
+    if (state.firestore.ordered.events && state.firestore.ordered.events[0]) {
+        event = state.firestore.ordered.events[0];
     }
 
     return {
-        event
-    }
-}
+        event,
+        auth: state.firebase.auth
+    };
+};
 
-const EventDetailsPage = ({event}) => {
-    return (
-        <div>
+const mapDispatchToProps = {
+    goingToEvent,
+    cancelGoingToEvent
+};
+
+class EventDetailsPage extends Component {
+    async componentDidMount() {
+        const { firestore, match } = this.props;
+        await firestore.setListener(`events/${match.params.id}`);
+    }
+
+    async componentWillUnmount() {
+        const { firestore, match } = this.props;
+        await firestore.unsetListener(`events/${match.params.id}`);
+    }
+
+    render() {
+        const { event, auth, goingToEvent, cancelGoingToEvent } = this.props;
+        const attendees = event && event.attendees && objectToArray(event.attendees);
+        const isHost = event.hostUid === auth.uid;
+        const isGoing = attendees && attendees.some(a => a.id === auth.uid);
+        return (
             <Grid>
                 <Grid.Column width={10}>
-                    <EventDetailsHeader event={event}/>
-                    <EventDetailsInfo event={event}/>
+                    <EventDetailsHeader
+                        event={event}
+                        isHost={isHost}
+                        isGoing={isGoing}
+                        goingToEvent={goingToEvent}
+                        cancelGoingToEvent={cancelGoingToEvent}
+                    />
+                    <EventDetailsInfo event={event} />
                     <EventDetailsChat />
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <EventDetailsSidebar attendees={event.attendees}/>
+                    <EventDetailsSidebar attendees={attendees} />
                 </Grid.Column>
             </Grid>
-        </div>
-    )
-
+        );
+    }
 }
 
-export default connect(mapStateToProps)(EventDetailsPage);
+export default withFirestore(connect(mapStateToProps, mapDispatchToProps)(EventDetailsPage));
