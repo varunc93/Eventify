@@ -29,13 +29,13 @@ const query = ({ auth }) => {
   ];
 };
 
-const actions = {
+const mapDispatchToProps = {
   uploadProfileImage,
   deletePhoto,
   setMainPhoto
 };
 
-const mapState = state => ({
+const mapStateToProps = state => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
   photos: state.firestore.ordered.photos,
@@ -204,6 +204,6 @@ class PhotosPage extends Component {
 }
 
 export default compose(
-  connect(mapState, actions),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect(auth => query(auth))
 )(PhotosPage);

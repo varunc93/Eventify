@@ -10,12 +10,12 @@ import BasicPage from './BasicPage';
 import { updatePassword } from '../../auth/authActions';
 import { updateProfile } from '../userActions'
 
-const actions = {
+const mapDispatchToProps = {
     updatePassword,
     updateProfile
 };
 
-const mapState = (state) => ({
+const mapStateToProps = (state) => ({
     providerId: state.firebase.auth.providerData[0].providerId,
     user: state.firebase.profile
 })
@@ -42,4 +42,4 @@ const SettingsDashboard = ({ updatePassword, providerId, user, updateProfile }) 
     );
 };
 
-export default connect(mapState, actions)(SettingsDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsDashboard);
