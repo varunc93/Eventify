@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Segment, Item, Icon, List, Button, Label } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import EventListAttendee from './EventListAttendee';
-import format from 'date-fns/format';
-import { objectToArray } from '../../../app/common/util/helpers';
+import { Link } from 'react-router-dom'
+import EventListAttendee from './EventListAttendee'
+import format from 'date-fns/format'
+import { objectToArray } from '../../../app/common/util/helpers'
 
 class EventListItem extends Component {
   render() {

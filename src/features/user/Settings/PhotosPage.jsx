@@ -80,7 +80,7 @@ class PhotosPage extends Component {
 
   handleSetMainPhoto = (photo) => async () => {
     try {
-      this.props.setMainPhoto(photo)
+      await this.props.setMainPhoto(photo)
     } catch (error) {
       toastr.error('Oops', error.message)
     }
@@ -190,7 +190,7 @@ class PhotosPage extends Component {
               <Card key={photo.id}>
                 <Image src={photo.url} />
                 <div className="ui two buttons">
-                  <Button onClick={this.handleSetMainPhoto(photo)} basic color="green">
+                  <Button loading={loading} onClick={this.handleSetMainPhoto(photo)} basic color="green">
                     Main
                   </Button>
                   <Button onClick={this.handlePhotoDelete(photo)} basic icon="trash" color="red" />

@@ -5,7 +5,7 @@ import moment from 'moment';
 import DateInput from '../../../app/common/form/DateInput';
 import PlaceInput from '../../../app/common/form/PlaceInput';
 import TextInput from '../../../app/common/form/TextInput';
-import RadioButton from '../../../app/common/form/RadioButton';
+import RadioInput from '../../../app/common/form/RadioInput';
 
 class BasicPage extends Component {
   render() {
@@ -28,14 +28,14 @@ class BasicPage extends Component {
               type="radio"
               value="male"
               label="Male"
-              component={RadioButton}
+              component={RadioInput}
             />
             <Field
               name="gender"
               type="radio"
               value="female"
               label="Female"
-              component={RadioButton}
+              component={RadioInput}
             />
           </Form.Group>
           <Field

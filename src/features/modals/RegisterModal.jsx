@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Modal } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Modal} from 'semantic-ui-react';
+import {connect} from 'react-redux';
 
-import { closeModal } from "./modalActions";
+import {closeModal} from "./modalActions";
 import RegisterForm from "../auth/Register/RegisterForm";
 
-const mapDispatchToProps = { closeModal };
+const mapDispatchToProps = {closeModal};
 
 class RegisterModal extends Component {
     render() {
@@ -16,7 +16,7 @@ class RegisterModal extends Component {
                 onClose={this.props.closeModal}
             >
                 <Modal.Header>
-                    Sign Up for Eventify!
+                    Sign Up to Eventify!!
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>

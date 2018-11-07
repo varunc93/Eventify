@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { Modal } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import LoginForm from '../auth/Login/LoginForm';
-import { closeModal } from "./modalActions";
+import React, {Component} from 'react';
+import {Modal} from 'semantic-ui-react';
+import {connect} from 'react-redux';
 
-const mapDispatchToProps = { closeModal };
+import LoginForm from '../auth/Login/LoginForm';
+import {closeModal} from "./modalActions";
+
+const mapDispatchToProps = {closeModal};
 
 class LoginModal extends Component {
     render() {
@@ -15,7 +16,7 @@ class LoginModal extends Component {
                 onClose={this.props.closeModal}
             >
                 <Modal.Header>
-                    Login to Eventify
+                    Login to Eventify!
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>

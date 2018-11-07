@@ -14,10 +14,10 @@ const UserDetailsDescription = ({ profile }) => {
           <Grid.Column width={10}>
             <Header icon="smile" content="About Display Name" />
             <p>
-              I am a: <strong>{profile.occupation || ' '}</strong>
+              I am a: <strong>{profile.occupation || 'tbn'}</strong>
             </p>
             <p>
-              Originally from <strong>{profile.origin || ' '}</strong>
+              Originally from <strong>{profile.origin || 'tbn'}</strong>
             </p>
             <p>
               Member Since: <strong>{createdAt}</strong>
