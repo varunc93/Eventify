@@ -3,7 +3,6 @@ import { Segment, List, Label, Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
 const EventDetailsSidebar = ({ attendees }) => {
-  const isHost = false;
   return (
     <div>
       <Segment
@@ -21,15 +20,16 @@ const EventDetailsSidebar = ({ attendees }) => {
           {attendees &&
             attendees.map(attendee => (
               <Item key={attendee.id} style={{ position: 'relative' }}>
-                {isHost &&
-                <Label
-                  style={{ position: 'absolute' }}
-                  color="orange"
-                  ribbon="right"
-                >
-                  Host
+                {
+                  attendee.host &&
+                  <Label
+                    style={{ position: 'absolute' }}
+                    color="orange"
+                    ribbon="right"
+                  >
+                    Host
                 </Label>}
-                <Item.Image size="tiny" src={attendee.photoURL}/>
+                <Item.Image size="tiny" src={attendee.photoURL} />
                 <Item.Content verticalAlign="middle">
                   <Item.Header as="h3">
                     <Link to={`/profile/${attendee.id}`}>{attendee.displayName}</Link>

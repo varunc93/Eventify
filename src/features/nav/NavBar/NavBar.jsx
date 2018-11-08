@@ -39,7 +39,7 @@ class NavBar extends Component {
         <Container>
           <Menu.Item as={Link} to="/" header>
             <img src="/assets/images/logo.png" alt="logo" />
-            Eventify!
+            Eventify
           </Menu.Item>
           <Menu.Item as={NavLink} to="/events" name="Events" />
           {authenticated &&

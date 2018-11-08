@@ -16,7 +16,7 @@ class RegisterModal extends Component {
                 onClose={this.props.closeModal}
             >
                 <Modal.Header>
-                    Sign Up to Eventify!!
+                    Sign Up to Eventify
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>

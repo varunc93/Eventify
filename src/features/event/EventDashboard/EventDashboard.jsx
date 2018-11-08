@@ -15,13 +15,13 @@ const query = [
   }
 ]
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   events: state.events,
   loading: state.async.loading,
   activities: state.firestore.ordered.activity
 });
 
-const mapDispatchToProps = {
+const actions = {
   getEventsForDashboard
 };
 
@@ -68,7 +68,7 @@ class EventDashboard extends Component {
   render() {
     const { loading, activities } = this.props;
     const { moreEvents, loadedEvents } = this.state;
-    //if (this.state.loadingInitial) return <LoadingComponent inverted={true} />;
+    if (this.state.loadingInitial) return <LoadingComponent inverted={true} />;
 
     return (
       <Grid>
@@ -94,4 +94,4 @@ class EventDashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(firestoreConnect(query)(EventDashboard));
+export default connect(mapState, actions)(firestoreConnect(query)(EventDashboard));

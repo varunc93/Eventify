@@ -70,12 +70,12 @@ class EventForm extends Component {
   };
 
   async componentDidMount() {
-    const {firestore, match} = this.props;
+    const { firestore, match } = this.props;
     await firestore.setListener(`events/${match.params.id}`);
   }
 
   async componentWillUnmount() {
-    const {firestore, match} = this.props;
+    const { firestore, match } = this.props;
     await firestore.unsetListener(`events/${match.params.id}`);
   }
 
@@ -196,14 +196,16 @@ class EventForm extends Component {
               <Button disabled={loading} onClick={this.props.history.goBack} type="button">
                 Cancel
               </Button>
-              <Button
-
-                onClick={() => cancelToggle(!event.cancelled, event.id)}
-                type='button'
-                color={event.cancelled ? 'green' : 'red'}
-                floated='right'
-                content={event.cancelled ? 'Reactivate Event' : 'Cancel Event'}
-              />
+              {
+                event.id &&
+                <Button
+                  onClick={() => cancelToggle(!event.cancelled, event.id)}
+                  type='button'
+                  color={event.cancelled ? 'green' : 'red'}
+                  floated='right'
+                  content={event.cancelled ? 'Reactivate Event' : 'Cancel Event'}
+                />
+              }
             </Form>
           </Segment>
         </Grid.Column>

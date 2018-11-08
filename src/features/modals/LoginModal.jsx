@@ -16,7 +16,7 @@ class LoginModal extends Component {
                 onClose={this.props.closeModal}
             >
                 <Modal.Header>
-                    Login to Eventify!
+                    Login to Eventify
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
